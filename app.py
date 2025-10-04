@@ -108,22 +108,27 @@ def profile_creation_page():
                                     max_value=datetime.date.today())
             
             gender = st.selectbox("Gender*", 
-                                ['Select...', 'Male', 'Female', 'Non-binary', 'Prefer not to say'],
+                                ['Select...', 'Male', 'Female', 'Other'],
                                 index=0 if not st.session_state.user_profile.get('gender') else 
-                                ['Select...', 'Male', 'Female', 'Non-binary', 'Prefer not to say'].index(st.session_state.user_profile.get('gender', 'Select...')))
+                                ['Select...', 'Male', 'Female', 'Other'].index(st.session_state.user_profile.get('gender', 'Select...')))
             
-            country = st.text_input("Country*", value=st.session_state.user_profile.get('country', ''))
+            # Country dropdown list
+            countries = ['Select...', 'United States', 'Canada', 'United Kingdom', 'Australia', 
+                        'Germany', 'France', 'Italy', 'Spain', 'Netherlands', 'Belgium',
+                        'Switzerland', 'Austria', 'Sweden', 'Norway', 'Denmark', 'Finland',
+                        'Ireland', 'New Zealand', 'Japan', 'South Korea', 'Singapore',
+                        'India', 'China', 'Brazil', 'Mexico', 'Argentina', 'Other']
             
-            profile_type = st.selectbox("Profile Type", 
-                                      ['Standard', 'Premium', 'Community'],
-                                      index=0 if not st.session_state.user_profile.get('profile_type') else
-                                      ['Standard', 'Premium', 'Community'].index(st.session_state.user_profile.get('profile_type', 'Standard')))
+            country = st.selectbox("Country*", 
+                                 countries,
+                                 index=0 if not st.session_state.user_profile.get('country') else
+                                 (countries.index(st.session_state.user_profile.get('country')) if st.session_state.user_profile.get('country') in countries else 0))
         
         submitted = st.form_submit_button("Continue to Questionnaire", type="primary", use_container_width=True)
         
         if submitted:
             # Validate required fields
-            if not all([first_name, last_name, email, username, gender != 'Select...', country]):
+            if not all([first_name, last_name, email, username, gender != 'Select...', country != 'Select...']):
                 st.error("Please fill in all required fields marked with *")
             else:
                 # Calculate age
@@ -135,7 +140,6 @@ def profile_creation_page():
                 st.session_state.user_profile = {
                     'user_id': f"user_{username}_{datetime.datetime.now().strftime('%Y%m%d%H%M%S')}",
                     'date_created': datetime.date.today().isoformat(),
-                    'profile_type': profile_type,
                     'first_name': first_name,
                     'last_name': last_name,
                     'email': email,
@@ -280,7 +284,11 @@ def initial_questionnaire_page():
             st.rerun()
 
 def entry_hall_page():
-    """Entry Hall with 15 baseline questions"""
+    """Entry Hall with 15 baseline questions
+    
+    Note: All questions use consistent polarity (1=most negative, 5=most positive)
+    for this prototype. In the full implementation, reverse-coded items will be adjusted.
+    """
     st.markdown('<h1 class="main-header">🏛️ Entry Hall</h1>', unsafe_allow_html=True)
     
     st.markdown("""
@@ -342,6 +350,8 @@ def entry_hall_page():
                         st.rerun()
                     else:
                         # Calculate Pulse Score (simplified)
+                        # Note: Uses consistent polarity (1-5) for all questions in this prototype
+                        # In production, reverse-coded items (stress, loneliness, boredom) should be reversed
                         total_score = sum([list(entry_questions[i]['options']).index(v) + 1 
                                          for i, v in enumerate(st.session_state.entry_hall_answers.values())
                                          if f"q_{i}" in st.session_state.entry_hall_answers])
