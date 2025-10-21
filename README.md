@@ -1,6 +1,6 @@
-# Compoda - Emotional Wellness Journey
+# Vita Nova - Emotional Wellness Journey
 
-A Streamlit-based skeleton UI for the Compoda emotional wellness application. This is a prototype that demonstrates the user flow and interface design for the three-door emotional wellness platform.
+A Streamlit-based skeleton UI for the Vita Nova emotional wellness application. This is a prototype that demonstrates the user flow and interface design for the three-door emotional wellness platform.
 
 ## Features
 
@@ -30,7 +30,7 @@ The application will open in your web browser at `http://localhost:8501`
 
 ## User Flow
 
-1. **Welcome Page** - Introduction to Compoda
+1. **Welcome Page** - Introduction to Vita Nova
 2. **Profile Creation** - User registration form
 3. **Initial Questionnaire** - 19 questions about background and preferences
 4. **Entry Hall** - 15 questions to establish emotional baseline (Pulse Score)
