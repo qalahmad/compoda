@@ -593,6 +593,21 @@ def door2_page():
                         st.session_state.current_question += 1
                         st.rerun()
                     else:
+                        # Calculate Matching Score for Door 2 (Connect Hub)
+                        # This represents how well the user's profile matches for connections
+                        door2_scores = []
+                        for i in range(min(len(connect_questions), 25)):
+                            if f"q_{i}" in st.session_state.door2_answers:
+                                answer_text = st.session_state.door2_answers[f"q_{i}"]
+                                answer_index = connect_questions[i]['options'].index(answer_text)
+                                # Convert to 1-5 scale
+                                door2_scores.append(answer_index + 1)
+                        
+                        # Calculate matching score (average of all responses)
+                        if door2_scores:
+                            matching_score = sum(door2_scores) / len(door2_scores)
+                            st.session_state.matching_score = round(matching_score, 2)
+                        
                         st.session_state.page = 'completion'
                         st.rerun()
     
@@ -719,8 +734,15 @@ def completion_page():
         st.write(f"• Social Index: {social_index}/5.0")
         st.write(f"• Security Index: {security_index}/5.0")
         
-        st.write("")  # Add spacing
+        # Display Matching Score if Door 2 (Connect Hub) was completed
         door = st.session_state.get('current_door', 'None')
+        if door == 2 and 'matching_score' in st.session_state:
+            st.write("")  # Add spacing
+            matching_score = st.session_state.get('matching_score', 0)
+            st.write(f"**Matching Score:** {matching_score}/5.0")
+            st.caption("Based on your Connect Hub responses")
+        
+        st.write("")  # Add spacing
         door_names = {1: "Emotional Room", 2: "Connect Hub", 3: "Guided Activity Spaces"}
         st.write(f"**Chosen Path:** {door_names.get(door, 'None')}")
     
