@@ -349,14 +349,35 @@ def entry_hall_page():
                         st.session_state.current_question += 1
                         st.rerun()
                     else:
-                        # Calculate Pulse Score (simplified)
+                        # Calculate Pulse Score and Subscores (simplified)
                         # Note: Uses consistent polarity (1-5) for all questions in this prototype
                         # In production, reverse-coded items (stress, loneliness, boredom) should be reversed
-                        total_score = sum([list(entry_questions[i]['options']).index(v) + 1 
-                                         for i, v in enumerate(st.session_state.entry_hall_answers.values())
-                                         if f"q_{i}" in st.session_state.entry_hall_answers])
+                        
+                        # Get all answer scores
+                        scores = [list(entry_questions[i]['options']).index(st.session_state.entry_hall_answers[f"q_{i}"]) + 1 
+                                 for i in range(len(entry_questions))]
+                        
+                        # Calculate overall Pulse Score
+                        total_score = sum(scores)
                         pulse_score = total_score / (len(entry_questions) * 5) * 5  # Scale to 5
                         st.session_state.pulse_score = round(pulse_score, 1)
+                        
+                        # Calculate Subscores based on question groupings
+                        # Mood Index: Q1 (Mood), Q7 (Hope), Q8 (Satisfaction)
+                        mood_scores = [scores[0], scores[6], scores[7]]
+                        st.session_state.mood_index = round(sum(mood_scores) / len(mood_scores), 2)
+                        
+                        # Energy Index: Q2 (Energy), Q3 (Sleep), Q4 (Motivation)
+                        energy_scores = [scores[1], scores[2], scores[3]]
+                        st.session_state.energy_index = round(sum(energy_scores) / len(energy_scores), 2)
+                        
+                        # Social Index: Q6 (Loneliness), Q13 (Intro/Extro), Q14 (Boredom), Q15 (Anticipation)
+                        social_scores = [scores[5], scores[12], scores[13], scores[14]]
+                        st.session_state.social_index = round(sum(social_scores) / len(social_scores), 2)
+                        
+                        # Security Index: Q5 (Stress), Q9 (Health), Q10 (Balance), Q11 (Security), Q12 (Presence)
+                        security_scores = [scores[4], scores[8], scores[9], scores[10], scores[11]]
+                        st.session_state.security_index = round(sum(security_scores) / len(security_scores), 2)
                         
                         st.success(f"Entry Hall completed! Your Pulse Score: {st.session_state.pulse_score}/5.0")
                         st.session_state.page = 'door_selection'
@@ -682,20 +703,76 @@ def completion_page():
         pulse_score = st.session_state.get('pulse_score', 0)
         st.write(f"**Pulse Score:** {pulse_score}/5.0")
         
+        # Display subscores
+        st.write("")  # Add spacing
+        st.write("**Subscores:**")
+        
+        # Get subscores from session state
+        mood_index = st.session_state.get('mood_index', 0)
+        energy_index = st.session_state.get('energy_index', 0)
+        social_index = st.session_state.get('social_index', 0)
+        security_index = st.session_state.get('security_index', 0)
+        
+        # Display each subscore
+        st.write(f"• Mood Index: {mood_index}/5.0")
+        st.write(f"• Energy Index: {energy_index}/5.0")
+        st.write(f"• Social Index: {social_index}/5.0")
+        st.write(f"• Security Index: {security_index}/5.0")
+        
+        st.write("")  # Add spacing
         door = st.session_state.get('current_door', 'None')
         door_names = {1: "Emotional Room", 2: "Connect Hub", 3: "Guided Activity Spaces"}
         st.write(f"**Chosen Path:** {door_names.get(door, 'None')}")
     
     st.markdown("---")
     
-    st.markdown("### 🔄 What's Next?")
+    # User Matching Recommendations Section
+    st.markdown("### 🔗 User Matching Recommendations")
+    
+    # Calculate matching recommendations based on subscores
+    pulse_score = st.session_state.get('pulse_score', 0)
+    mood_index = st.session_state.get('mood_index', 0)
+    energy_index = st.session_state.get('energy_index', 0)
+    social_index = st.session_state.get('social_index', 0)
+    security_index = st.session_state.get('security_index', 0)
+    
     st.info("""
-    In a full implementation, this is where you would:
-    - Receive personalized recommendations based on your responses
-    - Connect with others who have similar emotional patterns
-    - Access guided activities tailored to your current state
-    - Track your progress over time
+    **In a full implementation, you would be matched with users based on:**
+    - Similar emotional patterns and Pulse Score ranges
+    - Complementary subscore profiles for mutual support
+    - Shared interests and hobbies from your profile
+    - Temporal patterns (morning/evening activity preferences)
     """)
+    
+    # Display potential match profiles (simulated)
+    st.markdown("#### Potential Matches:")
+    
+    match_col1, match_col2 = st.columns(2)
+    
+    with match_col1:
+        st.markdown("""
+        **User Match 1: Similar Emotional State**
+        - Pulse Score: Similar range to yours
+        - High resonance in Mood and Social indices
+        - Looking for: Emotional support and connection
+        - Common interests: Based on your hobbies
+        """)
+    
+    with match_col2:
+        st.markdown("""
+        **User Match 2: Complementary Support**
+        - Pulse Score: Slightly higher energy levels
+        - Can provide: Motivation and activity ideas
+        - Seeking: Meaningful conversations
+        - Shared path: Also exploring the Connect Hub
+        """)
+    
+    st.markdown("")
+    st.markdown("**Why these matches?**")
+    st.write(f"• Your Pulse Score ({pulse_score}) suggests you would benefit from connections with users in similar emotional states")
+    st.write(f"• Your Social Index ({social_index}) indicates your preferred level of social engagement")
+    st.write(f"• Your Energy Index ({energy_index}) helps match activity compatibility")
+    st.write(f"• Your chosen path (Door {st.session_state.get('current_door', 1)}) connects you with like-minded users")
     
     col1, col2, col3 = st.columns(3)
     
