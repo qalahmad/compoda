@@ -4,7 +4,7 @@ from typing import Dict, Any
 
 # Configure page
 st.set_page_config(
-    page_title="Compoda - Emotional Wellness Journey",
+    page_title="Vita Nova - Emotional Wellness Journey",
     page_icon="🌱",
     layout="wide",
     initial_sidebar_state="collapsed"
@@ -59,13 +59,13 @@ def init_session_state():
         st.session_state.current_question = 0
 
 def welcome_page():
-    """Welcome page with introduction to Compoda"""
-    st.markdown('<h1 class="main-header">🌱 Welcome to Compoda</h1>', unsafe_allow_html=True)
+    """Welcome page with introduction to Vita Nova"""
+    st.markdown('<h1 class="main-header">🌱 Welcome to Vita Nova</h1>', unsafe_allow_html=True)
     
     st.markdown("""
     ### Your Emotional Wellness Journey Begins Here
     
-    Compoda is designed to help you explore your emotional landscape, connect with others who share similar experiences, 
+    Vita Nova is designed to help you explore your emotional landscape, connect with others who share similar experiences, 
     and discover personalized activities for your wellbeing.
     
     **Your Journey:**
@@ -294,7 +294,7 @@ def entry_hall_page():
     st.markdown("""
     Welcome to the Entry Hall! These questions help us understand your current emotional baseline - 
     your mood, energy, and overall state right now. This creates your **Pulse Score** that guides 
-    your journey through Compoda.
+    your journey through Vita Nova.
     """)
     
     # Progress indicator
@@ -392,7 +392,7 @@ def door_selection_page():
     st.markdown(f"**Your Current Pulse Score: {pulse_score}/5.0**")
     
     st.markdown("""
-    Based on your Entry Hall responses, choose one of three paths for your Compoda journey. 
+    Based on your Entry Hall responses, choose one of three paths for your Vita Nova journey. 
     Each door offers a unique experience tailored to different aspects of emotional wellness.
     """)
     
@@ -700,7 +700,7 @@ def completion_page():
     st.markdown('<h1 class="main-header">🎉 Journey Complete!</h1>', unsafe_allow_html=True)
     
     st.markdown("""
-    Congratulations! You've completed your Compoda journey. Here's a summary of your experience:
+    Congratulations! You've completed your Vita Nova journey. Here's a summary of your experience:
     """)
     
     # Display summary
