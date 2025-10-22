@@ -952,29 +952,69 @@ def door2_page():
     Imagine a star map where each star represents someone with similar emotional patterns.
     """)
     
-    # Sample questions for Door 2 (placeholder)
+    # Door 2: 25 Matching Questions (Communication & Interaction Preferences)
+    # Based on Interpersonal Compatibility Theory & Similarity-Attraction Paradigm
     connect_questions = [
-        {"text": "How do you prefer to communicate with others?", 
-         "options": ["Face-to-face", "Video calls", "Voice calls", "Text/messaging", "Mixed approaches"]},
-        {"text": "What draws you to connect with someone?", 
-         "options": ["Similar interests", "Shared experiences", "Complementary differences", "Emotional resonance", "Intellectual connection"]},
-        {"text": "How important is emotional support in your relationships?", 
-         "options": ["Not important", "Slightly important", "Moderately important", "Very important", "Extremely important"]},
-        {"text": "How do you usually respond when someone shares their feelings?", 
-         "options": ["Listen actively", "Offer advice", "Share similar experiences", "Ask questions", "Provide comfort"]},
-        {"text": "What makes you feel most understood by others?", 
-         "options": ["When they listen", "When they relate", "When they validate", "When they help", "When they accept"]}
-        # Add more questions as needed (up to 25)
+        # Communication Style (Q56-Q60)
+        {"text": "I prefer deep, meaningful conversations over small talk", 
+         "options": ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"]},
+        {"text": "I like to share my thoughts and feelings openly with others", 
+         "options": ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"]},
+        {"text": "I prefer text-based communication over face-to-face conversations", 
+         "options": ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"]},
+        {"text": "I enjoy long, detailed conversations that can last hours", 
+         "options": ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"]},
+        {"text": "I prefer direct, straightforward communication", 
+         "options": ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"]},
+        
+        # Interaction Pace (Q61-Q65)
+        {"text": "I respond to messages quickly, usually within minutes", 
+         "options": ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"]},
+        {"text": "I prefer regular, frequent check-ins with people I care about", 
+         "options": ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"]},
+        {"text": "I like to take my time to think before responding to others", 
+         "options": ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"]},
+        {"text": "I need space and time alone to recharge between social interactions", 
+         "options": ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"]},
+        {"text": "I prefer spontaneous conversations over scheduled ones", 
+         "options": ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"]},
+        
+        # Topics & Interests (Q66-Q70)
+        {"text": "I enjoy discussing personal experiences and emotions", 
+         "options": ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"]},
+        {"text": "I like conversations about ideas, theories, and abstract concepts", 
+         "options": ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"]},
+        {"text": "I prefer talking about shared hobbies and activities", 
+         "options": ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"]},
+        {"text": "I enjoy humor and playful banter in conversations", 
+         "options": ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"]},
+        {"text": "I like discussing current events and social issues", 
+         "options": ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"]},
+        
+        # Emotional Support & Safety (Q71-Q75)
+        {"text": "I feel comfortable sharing my vulnerabilities with others", 
+         "options": ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"]},
+        {"text": "I appreciate when others share their struggles with me", 
+         "options": ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"]},
+        {"text": "I prefer to offer practical solutions when someone shares a problem", 
+         "options": ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"]},
+        {"text": "I value emotional validation over advice when I'm upset", 
+         "options": ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"]},
+        {"text": "I need people who can handle my emotional intensity", 
+         "options": ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"]},
+        
+        # Connection Preferences (Q76-Q80)
+        {"text": "I prefer one-on-one interactions over group conversations", 
+         "options": ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"]},
+        {"text": "I connect best with people who have similar life experiences", 
+         "options": ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"]},
+        {"text": "I value consistency and reliability in relationships", 
+         "options": ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"]},
+        {"text": "I enjoy meeting new people and forming new connections", 
+         "options": ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"]},
+        {"text": "I prefer deep connections with a few people over many casual friendships", 
+         "options": ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"]},
     ]
-    
-    # Extend to 25 questions
-    while len(connect_questions) < 25:
-        connect_questions.extend([
-            {"text": f"Connection preference question {len(connect_questions)+1}?", 
-             "options": ["Strongly disagree", "Disagree", "Neutral", "Agree", "Strongly agree"]},
-        ])
-        if len(connect_questions) >= 25:
-            break
     
     current_q = st.session_state.current_question
     total_q = min(len(connect_questions), 25)
