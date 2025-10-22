@@ -873,29 +873,89 @@ def door1_page():
     Imagine walking through a responsive forest where the environment adapts to your feelings.
     """)
     
-    # Sample questions for Door 1 (placeholder)
+    # Door 1: 40 Resonance Questions (Emotion, Intensity, Context, Recency)
+    # Based on Circumplex Model of Emotion (Russell), Affect Grid, CBT, Recency Effect
     emotional_questions = [
-        {"text": "What emotion are you feeling most strongly right now?", 
-         "options": ["Joy", "Anger", "Fear", "Sadness", "Surprise", "Disgust", "Contempt"]},
-        {"text": "How intense is this emotion?", 
-         "options": ["Very mild", "Mild", "Moderate", "Strong", "Very strong"]},
-        {"text": "What triggered this emotion?", 
-         "options": ["Work/Study", "Relationships", "Health", "Future concerns", "Past memories"]},
-        {"text": "How recent is this feeling?", 
-         "options": ["Right now", "Past hour", "Today", "This week", "Longer ago"]},
-        {"text": "How comfortable are you with this emotion?", 
-         "options": ["Very uncomfortable", "Uncomfortable", "Neutral", "Comfortable", "Very comfortable"]},
-        # Add more questions as needed (up to 40)
+        # === CURRENT EMOTIONAL STATE (Valence & Arousal) - Q16-Q25 ===
+        {"text": "Right now, I feel content and satisfied with my life", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "I am experiencing feelings of joy or happiness at this moment", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "I feel anxious or worried about things in my life", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "I am feeling sad or down right now", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "I feel energized and activated", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "I am experiencing feelings of anger or frustration", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "I feel calm and peaceful", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "I am feeling excited or enthusiastic about something", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "I feel bored or understimulated", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "I am experiencing feelings of fear or unease", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        
+        # === EMOTIONAL INTENSITY - Q26-Q30 ===
+        {"text": "My emotions right now feel very intense and overwhelming", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "I can easily identify what I'm feeling", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "My emotional state is fluctuating rapidly (changing quickly)", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "I feel emotionally numb or disconnected", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "My emotions feel manageable and under control", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        
+        # === CONTEXTUAL TRIGGERS - Q31-Q40 ===
+        {"text": "My current mood is influenced by work or academic stress", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "Relationship issues are affecting how I feel right now", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "Physical health or pain is impacting my emotional state", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "Financial concerns are influencing my feelings", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "Social interactions today have shaped my mood", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "My living environment or home situation affects my emotions", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "Future worries or uncertainty impact how I feel", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "Past events or memories are influencing my current state", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "My emotional state is affected by the time of day or season", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "External events (news, world events) impact my mood", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        
+        # === RECENCY & DURATION - Q41-Q50 ===
+        {"text": "This emotional state started within the last few hours", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "I've been feeling this way for several days", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "My mood changes multiple times throughout the day", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "I can trace this feeling back to a specific recent event", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "This emotional pattern has persisted for weeks or longer", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        
+        # === EMOTIONAL PATTERNS & RECURRENCE - Q51-Q55 ===
+        {"text": "I experience similar emotions at the same time each day/week", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "Certain situations predictably trigger specific emotions in me", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "My emotional responses feel different than they used to be", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "I notice recurring emotional themes or cycles in my life", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "I feel emotionally similar to how I felt last week", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
     ]
-    
-    # Extend to 40 questions with variations
-    while len(emotional_questions) < 40:
-        emotional_questions.extend([
-            {"text": f"How often do you experience emotional question {len(emotional_questions)+1}?", 
-             "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
-        ])
-        if len(emotional_questions) >= 40:
-            break
     
     current_q = st.session_state.current_question
     total_q = min(len(emotional_questions), 40)
@@ -1129,29 +1189,58 @@ def door3_page():
     to suggest personalized micro-interventions for your wellness journey.
     """)
     
-    # Sample questions for Door 3 (placeholder)
+    # Door 3: 20 Adherence Questions (Activity Engagement & Consistency)
+    # Based on Morisky Adherence Scale, Habit Formation (BJ Fogg), Digital Mental Health
+    # Formula: 50% completion + 30% effect + 10% repeat intention + 10% barriers
     activity_questions = [
-        {"text": "What type of activities help you feel better when you're stressed?", 
-         "options": ["Physical exercise", "Creative activities", "Social activities", "Quiet reflection", "Learning something new"]},
-        {"text": "How much time can you typically dedicate to wellness activities?", 
-         "options": ["5-10 minutes", "10-20 minutes", "20-30 minutes", "30-60 minutes", "More than 1 hour"]},
-        {"text": "What environment makes you feel most calm?", 
-         "options": ["Nature/outdoors", "Quiet indoor space", "Busy social setting", "Familiar home space", "New/changing environments"]},
-        {"text": "How do you prefer to receive activity suggestions?", 
-         "options": ["Daily reminders", "Weekly plans", "In-the-moment suggestions", "Self-directed exploration", "Guided programs"]},
-        {"text": "What motivates you most to complete wellness activities?", 
-         "options": ["Personal goals", "Social accountability", "Visible progress", "Immediate benefits", "Long-term health"]}
-        # Add more questions as needed (up to 20)
+        # === COMPLETION/DOING (50% weight) - Q81-Q90 ===
+        {"text": "I complete guided wellness activities (meditation, journaling, exercise) when recommended", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "I follow through on wellness activities even when I don't feel like it", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "I engage in mindfulness or meditation practices regularly", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "I complete journaling or reflection exercises when suggested", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "I participate in physical movement or exercise activities as planned", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "I finish wellness activities once I start them (don't quit halfway)", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "I make time for self-care activities in my daily schedule", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "I engage with digital wellness tools or apps consistently", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "I complete breathing exercises or relaxation techniques when prompted", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "I track my wellness activities or progress regularly", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        
+        # === EFFECTIVENESS/USEFULNESS (30% weight) - Q91-Q95 ===
+        {"text": "Guided wellness activities actually improve my mood or stress levels", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "I notice positive changes in my wellbeing after completing activities", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "Meditation or mindfulness exercises help me feel more centered", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "Journaling or reflection activities provide me with valuable insights", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "Physical activities or movement improve my energy and mood", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        
+        # === REPEAT INTENTION (10% weight) - Q96-Q97 ===
+        {"text": "I intend to continue wellness activities in the future", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "I would recommend guided wellness activities to others", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        
+        # === BARRIERS/HURDLES (10% weight - reverse scored) - Q98-Q100 ===
+        {"text": "I forget to do wellness activities even when I plan to", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "Lack of time prevents me from completing wellness activities", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
+        {"text": "I feel too tired or unmotivated to engage in wellness practices", 
+         "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
     ]
-    
-    # Extend to 20 questions
-    while len(activity_questions) < 20:
-        activity_questions.extend([
-            {"text": f"Activity preference question {len(activity_questions)+1}?", 
-             "options": ["Never", "Rarely", "Sometimes", "Often", "Always"]},
-        ])
-        if len(activity_questions) >= 20:
-            break
     
     current_q = st.session_state.current_question
     total_q = min(len(activity_questions), 20)
